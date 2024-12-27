@@ -14,7 +14,7 @@ I am Abdur Rahman, a passionate Cyber Security Enthusiast and Ethical Hacker, ac
 ---
 
 ## 🛠️ Technologies & Skills
-- **Frontend Development**: HTML, CSS, WordPress customization.
+- **Frontend Development**: HTML, CSS, JavaScript customization.
 - **Cybersecurity**:
   - Ethical Hacking
   - Dark Web Research
