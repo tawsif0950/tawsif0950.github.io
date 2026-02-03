@@ -13,7 +13,7 @@
         :root {
             --bg-dark: #050505;
             --gold: #D4AF37;
-            --gold-glow: rgba(212, 175, 55, 0.3);
+            --gold-glow: rgba(212, 175, 55, 0.6);
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
@@ -139,63 +139,107 @@
             position: relative;
         }
 
-        .bio-box::before {
-            content: '"';
-            font-family: serif;
-            font-size: 4rem;
-            color: var(--gold);
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            opacity: 0.2;
-        }
-
         .bio-box p {
             color: var(--text-muted);
             line-height: 1.8;
             font-size: 1.05rem;
         }
 
-        /* Gallery Section */
+        /* --- STYLISH NO-TEXT GALLERY --- */
         .gallery-section {
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
         .section-title {
             text-align: center;
             font-family: 'Rajdhani', sans-serif;
             color: var(--gold);
-            margin-bottom: 25px;
-            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px var(--gold-glow);
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
-        .gallery-item {
-            height: 350px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
+        .gallery-card {
+            height: 450px; /* Taller for better impact */
             position: relative;
-            background: var(--glass-bg);
+            background: #000;
+            /* Modern Polygon Cut */
+            clip-path: polygon(
+                25px 0, 100% 0, 
+                100% calc(100% - 25px), calc(100% - 25px) 100%, 
+                0 100%, 0 25px
+            );
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .gallery-item img {
+        /* Image Styling */
+        .gallery-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease, filter 0.5s ease;
+            filter: grayscale(40%) brightness(0.7); /* Dimmed initially */
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        /* Inner Border Glow Effect (Pseudo-element) */
+        .gallery-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+            z-index: 2;
+            transition: box-shadow 0.4s ease;
+            pointer-events: none;
         }
+
+        /* HOVER EFFECTS */
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            /* Outer glow */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.1); 
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.15); /* Zoom in */
+            filter: grayscale(0%) brightness(1.1); /* Full color & bright */
+        }
+
+        .gallery-card:hover::after {
+            /* Inner Gold Border Glow on Hover */
+            box-shadow: inset 0 0 0 2px var(--gold), inset 0 0 30px var(--gold-glow);
+        }
+        
+        /* Central Icon Fade-in (Optional decorative touch) */
+        .hover-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            color: var(--gold);
+            font-size: 2rem;
+            opacity: 0;
+            z-index: 3;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .gallery-card:hover .hover-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* --- END GALLERY --- */
 
         /* Links Grid */
         .links-grid {
@@ -290,7 +334,7 @@
         @media (max-width: 600px) {
             .hero h1 { font-size: 2.2rem; }
             .bio-box { padding: 20px; }
-            .gallery-item { height: 250px; }
+            .gallery-card { height: 350px; }
         }
     </style>
 </head>
@@ -325,16 +369,25 @@
             </p>
         </section>
 
-        <!-- Image Gallery -->
+        <!-- STYLISH NO-TEXT GALLERY -->
         <section class="gallery-section">
-            <h2 class="section-title">Lifestyle & Setup</h2>
+            <h2 class="section-title">Visual Archive</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://tawsif0950.github.io/IMG_20250830_123231.jpg" alt="Setup Photo 1">
+                
+                <!-- Image 1 -->
+                <div class="gallery-card">
+                    <img src="https://tawsif0950.github.io/IMG_20250830_123231.jpg" alt="Trading Lifestyle">
+                    <!-- Subtle centered icon that appears on hover -->
+                    <div class="hover-icon"><i class="fa-solid fa-expand"></i></div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://tawsif0950.github.io/IMG-20251227-WA0096.jpg" alt="Setup Photo 2">
+
+                <!-- Image 2 -->
+                <div class="gallery-card">
+                    <img src="https://tawsif0950.github.io/IMG-20251227-WA0096.jpg" alt="Trading Setup">
+                    <!-- Subtle centered icon that appears on hover -->
+                    <div class="hover-icon"><i class="fa-solid fa-expand"></i></div>
                 </div>
+
             </div>
         </section>
 
@@ -353,7 +406,7 @@
             <a href="https://discord.com/users/tawsif095" target="_blank" class="link-card">
                 <div class="icon-box"><i class="fa-brands fa-discord"></i></div>
                 <div class="link-info">
-                    <h3>Discord Community</h3>
+                    <h3>Discord</h3>
                     <span>User: tawsif095</span>
                 </div>
             </a>
