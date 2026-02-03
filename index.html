@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdur Rahman | Portfolio</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Rajdhani:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,6 +18,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
+            --neon-green: #00ff9d;
         }
 
         * {
@@ -77,18 +78,56 @@
 
         .logo span { color: var(--gold); }
 
-        /* Hero Profile */
+        /* HERO SECTION */
         .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 20px;
             margin-bottom: 60px;
         }
 
+        /* IP & Location Badge */
+        .ip-badge {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--glass-border);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--neon-green);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+            opacity: 0; 
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .flag-icon {
+            height: 14px;
+            width: auto;
+            border-radius: 2px;
+            display: block;
+        }
+
+        /* Profile Image */
         .img-container {
             position: relative;
             width: 180px;
             height: 180px;
-            margin: 0 auto 25px;
+            margin-bottom: 25px;
         }
 
         .profile-img {
@@ -106,6 +145,14 @@
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(0, 255, 157, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+        }
+        
+        @keyframes fadeIn { to { opacity: 1; } }
 
         .hero h1 {
             font-size: 3rem;
@@ -145,7 +192,7 @@
             font-size: 1.05rem;
         }
 
-        /* --- STYLISH NO-TEXT GALLERY --- */
+        /* --- STYLISH GALLERY (CLEAN) --- */
         .gallery-section {
             margin-bottom: 80px;
         }
@@ -168,10 +215,9 @@
         }
 
         .gallery-card {
-            height: 450px; /* Taller for better impact */
+            height: 450px;
             position: relative;
             background: #000;
-            /* Modern Polygon Cut */
             clip-path: polygon(
                 25px 0, 100% 0, 
                 100% calc(100% - 25px), calc(100% - 25px) 100%, 
@@ -183,16 +229,15 @@
             transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Image Styling */
         .gallery-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease, filter 0.5s ease;
-            filter: grayscale(40%) brightness(0.7); /* Dimmed initially */
+            filter: grayscale(40%) brightness(0.7);
         }
 
-        /* Inner Border Glow Effect (Pseudo-element) */
+        /* Inner Glow */
         .gallery-card::after {
             content: '';
             position: absolute;
@@ -203,44 +248,21 @@
             pointer-events: none;
         }
 
-        /* HOVER EFFECTS */
+        /* HOVER EFFECTS - NO ICON */
         .gallery-card:hover {
             transform: translateY(-8px);
-            /* Outer glow */
             box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.1); 
         }
 
         .gallery-card:hover img {
-            transform: scale(1.15); /* Zoom in */
-            filter: grayscale(0%) brightness(1.1); /* Full color & bright */
+            transform: scale(1.15);
+            filter: grayscale(0%) brightness(1.1);
         }
 
         .gallery-card:hover::after {
-            /* Inner Gold Border Glow on Hover */
             box-shadow: inset 0 0 0 2px var(--gold), inset 0 0 30px var(--gold-glow);
         }
         
-        /* Central Icon Fade-in (Optional decorative touch) */
-        .hover-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            color: var(--gold);
-            font-size: 2rem;
-            opacity: 0;
-            z-index: 3;
-            transition: all 0.4s ease;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
-        }
-
-        .gallery-card:hover .hover-icon {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        /* --- END GALLERY --- */
-
         /* Links Grid */
         .links-grid {
             display: grid;
@@ -283,15 +305,8 @@
 
         .link-card:hover .icon-box { color: var(--gold); }
 
-        .link-info h3 {
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .link-info span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .link-info h3 { font-size: 1rem; margin-bottom: 4px; }
+        .link-info span { font-size: 0.8rem; color: var(--text-muted); }
 
         /* WhatsApp Button */
         .whatsapp-container {
@@ -330,7 +345,6 @@
             padding-bottom: 30px;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             .hero h1 { font-size: 2.2rem; }
             .bio-box { padding: 20px; }
@@ -352,6 +366,14 @@
 
         <!-- Hero Section -->
         <section class="hero">
+            
+            <!-- Real Working IP & Flag Display -->
+            <div class="ip-badge" id="ipBadge">
+                <span class="pulse-dot"></span>
+                <span id="ipText">LOADING...</span>
+                <img id="countryFlag" class="flag-icon" src="" alt="" style="display: none;">
+            </div>
+
             <div class="img-container">
                 <img src="https://tawsif0950.github.io/20241224_162946.jpg" alt="Abdur Rahman" class="profile-img">
             </div>
@@ -369,7 +391,7 @@
             </p>
         </section>
 
-        <!-- STYLISH NO-TEXT GALLERY -->
+        <!-- STYLISH GALLERY (NO ICON) -->
         <section class="gallery-section">
             <h2 class="section-title">Visual Archive</h2>
             <div class="gallery-grid">
@@ -377,15 +399,11 @@
                 <!-- Image 1 -->
                 <div class="gallery-card">
                     <img src="https://tawsif0950.github.io/IMG_20250830_123231.jpg" alt="Trading Lifestyle">
-                    <!-- Subtle centered icon that appears on hover -->
-                    <div class="hover-icon"><i class="fa-solid fa-expand"></i></div>
                 </div>
 
                 <!-- Image 2 -->
                 <div class="gallery-card">
                     <img src="https://tawsif0950.github.io/IMG-20251227-WA0096.jpg" alt="Trading Setup">
-                    <!-- Subtle centered icon that appears on hover -->
-                    <div class="hover-icon"><i class="fa-solid fa-expand"></i></div>
                 </div>
 
             </div>
@@ -442,6 +460,37 @@
             <p>&copy; 2026 Abdur Rahman. All Rights Reserved.</p>
         </footer>
     </div>
+
+    <!-- Script to Fetch Real IP and Flag -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ipText = document.getElementById('ipText');
+            const flagImg = document.getElementById('countryFlag');
+
+            // Using ipwho.is (Free, no-key API)
+            fetch('https://ipwho.is/')
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        // Success: Show ONLY the IP
+                        ipText.innerText = data.ip;
+                        
+                        // Set Flag
+                        const countryCode = data.country_code.toLowerCase();
+                        flagImg.src = `https://flagcdn.com/24x18/${countryCode}.png`;
+                        flagImg.alt = data.country;
+                        flagImg.style.display = 'block';
+                    } else {
+                        // API failure
+                        ipText.innerText = "127.0.0.1";
+                    }
+                })
+                .catch(error => {
+                    console.error('IP Fetch Error:', error);
+                    ipText.innerText = "127.0.0.1";
+                });
+        });
+    </script>
 
 </body>
 </html>
