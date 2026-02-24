@@ -259,6 +259,31 @@
             100% { transform: rotate(360deg); } 
         }
 
+        /* --- FLOATING ANIMATIONS --- */
+        @keyframes float-element {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Floating Background Particles */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(1px);
+        }
+        .p1 { width: 6px; height: 6px; background: var(--gold); top: 15%; left: 10%; animation: float-particle 15s infinite ease-in-out; opacity: 0.4; }
+        .p2 { width: 8px; height: 8px; background: var(--cyber-blue); top: 65%; left: 85%; animation: float-particle 18s infinite ease-in-out reverse; opacity: 0.3; }
+        .p3 { width: 4px; height: 4px; background: var(--neon-green); top: 80%; left: 15%; animation: float-particle 12s infinite ease-in-out 3s; opacity: 0.5; }
+        .p4 { width: 10px; height: 10px; border: 1px solid var(--gold); top: 30%; left: 80%; animation: float-particle 20s infinite ease-in-out 1s; opacity: 0.2; }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -50px); }
+            66% { transform: translate(-20px, -20px); }
+        }
+
         .profile-img {
             width: 100%;
             height: 100%;
@@ -418,27 +443,6 @@
             filter: grayscale(80%) contrast(1.2) brightness(0.6);
         }
 
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%);
-            display: flex;
-            align-items: flex-end;
-            padding: 30px;
-            opacity: 0;
-            transition: var(--transition-smooth);
-            z-index: 2;
-        }
-
-        .gallery-overlay span {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--gold);
-            letter-spacing: 2px;
-            transform: translateY(20px);
-            transition: var(--transition-smooth);
-        }
-
         .gallery-card:hover {
             transform: translateY(-10px);
             border-color: var(--gold);
@@ -448,14 +452,6 @@
         .gallery-card:hover img {
             transform: scale(1.08);
             filter: grayscale(0%) contrast(1.1) brightness(1);
-        }
-
-        .gallery-card:hover .gallery-overlay {
-            opacity: 1;
-        }
-        
-        .gallery-card:hover .gallery-overlay span {
-            transform: translateY(0);
         }
 
         /* Premium Links Grid */
@@ -633,6 +629,12 @@
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
+    <!-- Floating Particles -->
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+
     <!-- Ambient Lighting -->
     <div class="ambient-light"></div>
     <div class="ambient-light-2"></div>
@@ -653,7 +655,7 @@
                 <img id="countryFlag" class="flag-icon" src="" alt="" style="display: none;">
             </div>
 
-            <div class="img-container">
+            <div class="img-container" style="animation: float-element 6s ease-in-out infinite;">
                 <img src="https://tawsif0950.github.io/20241224_162946.jpg" alt="Abdur Rahman" class="profile-img">
             </div>
             
@@ -681,17 +683,11 @@
                 <!-- Image 1 -->
                 <div class="gallery-card">
                     <img src="https://tawsif0950.github.io/IMG_20250830_123231.jpg" alt="Trading Lifestyle">
-                    <div class="gallery-overlay">
-                        <span>> TRADING_LIFESTYLE.JPG</span>
-                    </div>
                 </div>
 
                 <!-- Image 2 -->
                 <div class="gallery-card">
                     <img src="https://tawsif0950.github.io/IMG-20251227-WA0096.jpg" alt="Trading Setup">
-                    <div class="gallery-overlay">
-                        <span>> BATTLE_STATION.JPG</span>
-                    </div>
                 </div>
 
             </div>
